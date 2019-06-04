@@ -1,11 +1,10 @@
 package main;
 
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PreferencesTest {
 
@@ -33,10 +32,5 @@ public class PreferencesTest {
     public void mid3() throws Exception {
         assertEquals(null, prefTest.getUsername());
         assertEquals(null, prefTest.getPassword());
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
     }
 }
