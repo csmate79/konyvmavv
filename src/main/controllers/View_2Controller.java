@@ -15,8 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,7 +54,7 @@ public class View_2Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         adatbaziskezelo = AdatbazisKezelo.getInstance();
 
-        checkData();
+        AdatbazisKezelo.checkData();
     }
 
     /**
@@ -109,22 +107,6 @@ public class View_2Controller implements Initializable {
             alert.setContentText("Nem sikerült");
             alert.showAndWait();
             Logger.getLogger(View_2Controller.class.getName()).log(Level.INFO, "Nem sikerült");
-        }
-    }
-
-    /**
-     * Lekérjük az adatbázis könyveinek a címet, és kiíratjuk a terminálra.
-     */
-    private void checkData() {
-        String qu = "SELECT title FROM BOOK";
-        ResultSet rs = adatbaziskezelo.execQuery(qu);
-        try {
-            while (rs.next()) {
-                String titlex = rs.getString("title");
-                System.out.println(titlex);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(View_2Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

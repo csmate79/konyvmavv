@@ -61,10 +61,10 @@ public class MemberListaKezelo implements Initializable {
      */
     private void loadData() {
         list.clear();
+        AdatbazisKezelo kez = new AdatbazisKezelo();
+        kez.memB();
 
-        AdatbazisKezelo kezelo = AdatbazisKezelo.getInstance();
-        String qu = "SELECT * FROM MEMBER";
-        ResultSet rs = kezelo.execQuery(qu);
+        ResultSet rs = kez.kezelo.execQuery(kez.qu);
         try {
             while (rs.next()) {
                 String name = rs.getString("name");

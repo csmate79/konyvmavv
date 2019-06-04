@@ -12,20 +12,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import main.Main;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -93,46 +88,27 @@ public class MainKezelo implements Initializable {
      */
     @FXML
     private void loadAddMember(ActionEvent event) {
-        loadWindow("/add_member.fxml", "Tag hozzáadás");
+        Main.loadWindow("/add_member.fxml", "Tag hozzáadás");
     }
 
     @FXML
     private void loadAddBook(ActionEvent event) {
-        loadWindow("/view_2.fxml", "Könyv hozzáadás");
+        Main.loadWindow("/view_2.fxml", "Könyv hozzáadás");
     }
 
     @FXML
     private void loadMemberList(ActionEvent event) {
-        loadWindow("/member_lista.fxml", "Tag hozzáadás");
+        Main.loadWindow("/member_lista.fxml", "Tag hozzáadás");
     }
 
     @FXML
     private void loadBookList(ActionEvent event) {
-        loadWindow("/konyv_lista.fxml", "Tag hozzáadás");
+        Main.loadWindow("/konyv_lista.fxml", "Tag hozzáadás");
     }
 
     @FXML
     private void loadSettings(ActionEvent event) {
-        loadWindow("/beallitasok.fxml", "Beallitasok");
-    }
-
-    /**
-     * Ablak megnyitás függvény.
-     *
-     * @param loc - melyik fxml fájlt.
-     * @param title - mit írjon ki.
-     */
-    private void loadWindow(String loc, String title) {
-        try {
-            Parent parent = FXMLLoader.load(getClass().getResource(loc));
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setTitle(title);
-            stage.setScene(new Scene(parent));
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(MainKezelo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        Main.loadWindow("/beallitasok.fxml", "Beallitasok");
     }
 
     /**

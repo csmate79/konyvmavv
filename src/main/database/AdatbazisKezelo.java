@@ -5,8 +5,12 @@
  */
 package database;
 
+import controllers.View_2Controller;
+
 import javax.swing.*;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -14,13 +18,14 @@ import java.sql.*;
  * @author csicsek
  */
 public final class AdatbazisKezelo {
-    private static AdatbazisKezelo kezelo;
+    public static AdatbazisKezelo kezelo;
 
     private static final String DB_URL = "jdbc:derby:database/library2;create=true";
     private static Connection conn = null;
     private static Statement stmt = null;
+    public String qu;
 
-    private AdatbazisKezelo() {
+    public AdatbazisKezelo() {
         createConnection();
         setupBookTable();
         setupMemberTable();
@@ -72,6 +77,22 @@ public final class AdatbazisKezelo {
     }
 
     /**
+     * Lekérjük az adatbázis könyveinek a címet, és kiíratjuk a terminálra.
+     */
+    public static void checkData() {
+        String qu = "SELECT title FROM BOOK";
+        ResultSet rs = execQuery(qu);
+        try {
+            while (rs.next()) {
+                String titlex = rs.getString("title");
+                System.out.println(titlex);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(View_2Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
      * Itt hozzuk létre a MEMBER táblát.
      */
     private void setupMemberTable() {
@@ -93,6 +114,22 @@ public final class AdatbazisKezelo {
         } catch (SQLException e) {
             System.err.println(e.getMessage() + " .. adatbázis hiba");
         }
+    }
+
+    /**
+     * "Tag" adatbázis lekérés.
+     */
+    public void memB() {
+        kezelo = AdatbazisKezelo.getInstance();
+        qu = "SELECT * FROM MEMBER";
+    }
+
+    /**
+     *  "Könyv" adatbázis lekérés.
+     */
+    public void konyvB() {
+        kezelo = AdatbazisKezelo.getInstance();
+        qu = "SELECT * FROM BOOK";
     }
 
 
@@ -126,7 +163,7 @@ public final class AdatbazisKezelo {
      * @param query - lekér
      * @return - vissza adja az eredményt.
      */
-    public ResultSet execQuery(String query) {
+    public static ResultSet execQuery(String query) {
         ResultSet result;
         try {
             stmt = conn.createStatement();

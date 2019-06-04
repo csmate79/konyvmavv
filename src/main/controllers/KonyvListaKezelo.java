@@ -59,10 +59,10 @@ public class KonyvListaKezelo implements Initializable {
      */
     private void loadData() {
         list.clear();
+        AdatbazisKezelo kez = new AdatbazisKezelo();
+        kez.konyvB();
 
-        AdatbazisKezelo kezelo = AdatbazisKezelo.getInstance();
-        String qu = "SELECT * FROM BOOK";
-        ResultSet rs = kezelo.execQuery(qu);
+        ResultSet rs = kez.kezelo.execQuery(kez.qu);
         try {
             while (rs.next()) {
                 String titlex = rs.getString("title");

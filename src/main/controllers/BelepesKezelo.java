@@ -9,16 +9,12 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import main.Main;
 import main.Preferences;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -72,7 +68,7 @@ public class BelepesKezelo implements Initializable {
 
         if(uname.equals(preference.getUsername()) && pword.equals(preference.getPassword())){
             ((Stage)username.getScene().getWindow()).close();
-            loadMain();
+            Main.loadMain();
             Logger.getLogger(BelepesKezelo.class.getName()).log(Level.INFO, "Sikerült belépni");
         } else if (username != null && jelszo != null) {
             titleLabel.setText("Töltsd ki a mezőket");
@@ -92,20 +88,5 @@ public class BelepesKezelo implements Initializable {
     @FXML
     private void cancelButtAct(ActionEvent event) {
         System.exit(0);
-    }
-
-    /**
-     * A main ablakra való lépés függvényben.
-     */
-    private void loadMain() {
-        try {
-            Parent parent = FXMLLoader.load(getClass().getResource("/main.fxml"));
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setTitle("Könyvtárkezelő");
-            stage.setScene(new Scene(parent));
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(MainKezelo.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 }
